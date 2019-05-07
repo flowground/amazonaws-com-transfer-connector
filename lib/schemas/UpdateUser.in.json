@@ -1,0 +1,75 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "HomeDirectory": {
+                    "description": "The HomeDirectory parameter specifies the landing directory (folder) for a user when they log in to the server using their client. An example would be: <code>/home/<i>username</i> </code>.",
+                    "maxLength": 1024,
+                    "pattern": "^$|/.*",
+                    "type": "string"
+                },
+                "Policy": {
+                    "description": "Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down users access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.",
+                    "type": "string"
+                },
+                "Role": {
+                    "description": "The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user’s transfer requests.",
+                    "pattern": "arn:.*role/.*",
+                    "type": "string"
+                },
+                "ServerId": {
+                    "description": "A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.",
+                    "pattern": "^s-([0-9a-f]{17})$",
+                    "type": "string"
+                },
+                "UserName": {
+                    "description": "A unique string that identifies a user and is associated with a server as specified by the ServerId. This is the string that will be used by your user when they log in to your SFTP server.",
+                    "pattern": "^[a-z0-9]{3,32}$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ServerId",
+                "UserName"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

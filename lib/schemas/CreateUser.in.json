@@ -1,0 +1,106 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "HomeDirectory": {
+                    "description": "The landing directory (folder) for a user when they log in to the server using their SFTP client. An example is <code>/home/<i>username</i> </code>.",
+                    "maxLength": 1024,
+                    "pattern": "^$|/.*",
+                    "type": "string"
+                },
+                "Policy": {
+                    "description": "A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.",
+                    "type": "string"
+                },
+                "Role": {
+                    "description": "The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user’s transfer requests.",
+                    "pattern": "arn:.*role/.*",
+                    "type": "string"
+                },
+                "ServerId": {
+                    "description": "A system-assigned unique identifier for an SFTP server instance. This is the specific SFTP server that you added your user to.",
+                    "pattern": "^s-([0-9a-f]{17})$",
+                    "type": "string"
+                },
+                "SshPublicKeyBody": {
+                    "description": "The public portion of the Secure Shall (SSH) key used to authenticate the user to the SFTP server.",
+                    "maxLength": 2048,
+                    "pattern": "^ssh-rsa\\s+[A-Za-z0-9+/]+[=]{0,3}(\\s+.+)?\\s*$",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "Key-value pairs that can be used to group and search for users. Tags are metadata attached to users for any purpose.",
+                    "items": {
+                        "description": "Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.",
+                        "properties": {
+                            "Key": {
+                                "description": "The name assigned to the tag that you create.",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "This property contains one or more values that you assigned to the key name you create.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "Key",
+                            "Value"
+                        ],
+                        "type": "object"
+                    },
+                    "maxItems": 50,
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "UserName": {
+                    "description": "A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>.",
+                    "pattern": "^[a-z0-9]{3,32}$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Role",
+                "ServerId",
+                "UserName"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

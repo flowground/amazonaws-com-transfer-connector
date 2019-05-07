@@ -1,0 +1,74 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "IdentityProviderDetails": {
+                    "description": "This response parameter is an array containing all of the information required to call a customer's authentication API method.",
+                    "properties": {
+                        "InvocationRole": {
+                            "description": "The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.",
+                            "pattern": "arn:.*role/.*",
+                            "type": "string"
+                        },
+                        "Url": {
+                            "description": "The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "LoggingRole": {
+                    "description": "Changes the AWS Identity and Access Management (IAM) role that allows Amazon S3 events to be logged in Amazon CloudWatch, turning logging on or off.",
+                    "pattern": "^$|arn:.*role/.*",
+                    "type": "string"
+                },
+                "ServerId": {
+                    "description": "A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.",
+                    "pattern": "^s-([0-9a-f]{17})$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ServerId"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

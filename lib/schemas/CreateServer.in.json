@@ -1,0 +1,98 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "IdentityProviderDetails": {
+                    "description": "An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.",
+                    "properties": {
+                        "InvocationRole": {
+                            "description": "The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.",
+                            "pattern": "arn:.*role/.*",
+                            "type": "string"
+                        },
+                        "Url": {
+                            "description": "The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "IdentityProviderType": {
+                    "description": "The mode of authentication enabled for this service. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access SFTP user credentials within the service. An <code>IdentityProviderType</code> value of <code>API_GATEWAY</code> indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice.",
+                    "enum": [
+                        "SERVICE_MANAGED",
+                        "API_GATEWAY"
+                    ],
+                    "type": "string"
+                },
+                "LoggingRole": {
+                    "description": "A value that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.",
+                    "pattern": "arn:.*role/.*",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "Key-value pairs that can be used to group and search for servers.",
+                    "items": {
+                        "description": "Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.",
+                        "properties": {
+                            "Key": {
+                                "description": "The name assigned to the tag that you create.",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "This property contains one or more values that you assigned to the key name you create.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "Key",
+                            "Value"
+                        ],
+                        "type": "object"
+                    },
+                    "maxItems": 50,
+                    "minItems": 1,
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
